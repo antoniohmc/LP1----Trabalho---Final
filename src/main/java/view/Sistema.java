@@ -3,6 +3,7 @@ package view;
 import controller.RestauranteController;
 import exception.AplicacaoException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -100,10 +101,9 @@ public class Sistema {
         System.out.println("Informe o ID do Restaurante:");
         Integer idRestaurante = scanner.nextInt();
 
-        System.out.println("Informe a data do voto (formato AAAA-MM-DD):");
-        String dataStr = scanner.next();
 
-        LocalDate data = LocalDate.parse(dataStr);
+
+        Calendar data = Calendar.getInstance();
 
         controller.inserirVoto(idFuncionario, idRestaurante, data);
         System.out.println("Voto cadastrado com sucesso!");

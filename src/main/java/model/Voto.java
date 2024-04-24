@@ -1,17 +1,9 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Objects;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
 /**
  * Classe que representa um voto em um restaurante por um funcionário.
@@ -20,6 +12,9 @@ import javax.persistence.TableGenerator;
 @Table(name = "VOTO")
 public class Voto {
 
+    /**
+     * Gereção de valores no banco de dados.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "voto_generator")
     @TableGenerator(
@@ -33,13 +28,16 @@ public class Voto {
     @Column(name = "Id")
     private Integer id;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data")
-    private LocalDate data;
+    private Calendar data;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_restaurante", referencedColumnName = "id")
     private Funcionario funcionario;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_funcionario", referencedColumnName = "id")
     private Restaurante restaurante;
 
     /**
@@ -54,7 +52,7 @@ public class Voto {
      * @param id   O ID do voto.
      * @param data A data do voto.
      */
-    public Voto(Integer id, LocalDate data) {
+    public Voto(Integer id, Calendar data) {
         this.id = id;
         this.data = data;
     }
@@ -73,7 +71,7 @@ public class Voto {
      *
      * @return A data do voto.
      */
-    public LocalDate getData() {
+    public Calendar getData() {
         return data;
     }
 
@@ -82,7 +80,7 @@ public class Voto {
      *
      * @param data A data a ser definida.
      */
-    public void setData(LocalDate data) {
+    public void setData(Calendar data) {
         this.data = data;
     }
 

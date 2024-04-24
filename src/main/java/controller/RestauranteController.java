@@ -2,6 +2,7 @@ package controller;
 
 import exception.AplicacaoException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.PersistenceException;
 import model.Funcionario;
@@ -58,7 +59,7 @@ public class RestauranteController {
      * @param nome O nome do funcionário a ser inserido.
      * @throws AplicacaoException Se ocorrer um erro durante a inserção do funcionário.
      */
-    public void inserirFuncionario( String nome) throws AplicacaoException {
+    public void inserirFuncionario(String nome) throws AplicacaoException {
         listaFuncionario().add(new Funcionario(nome));
 
         try {
@@ -92,7 +93,7 @@ public class RestauranteController {
      * @param data A data em que o voto está sendo realizado.
      * @throws AplicacaoException Se o funcionário já votou no mesmo dia ou se um ID não for encontrado.
      */
-    public void inserirVoto(Integer idFuncionario, Integer idRestaurante, LocalDate data) throws AplicacaoException {
+    public void inserirVoto(Integer idFuncionario, Integer idRestaurante, Calendar data) throws AplicacaoException {
         Funcionario funcionario = funcionarioRepository.buscarFuncionarioPorId(idFuncionario);
         if (funcionario == null) {
             throw new AplicacaoException("Funcionário não encontrado.");
@@ -117,4 +118,6 @@ public class RestauranteController {
 
         votoRepository.inserir(novoVoto);
     }
+
+
 }

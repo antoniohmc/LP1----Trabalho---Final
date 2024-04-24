@@ -16,6 +16,9 @@ import javax.persistence.TableGenerator;
 @Table(name = "RESTAURANTE")
 public class Restaurante {
 
+    /**
+     * Gereção de valores no banco de dados.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "restaurante_generator")
     @TableGenerator(

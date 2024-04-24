@@ -16,6 +16,9 @@ import javax.persistence.TableGenerator;
 @Table(name = "FUNCIONARIO")
 public class Funcionario {
 
+    /**
+     * Gereção de valores no banco de dados.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "funcionario_generator")
     @TableGenerator(

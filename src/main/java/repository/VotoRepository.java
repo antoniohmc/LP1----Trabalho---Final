@@ -29,7 +29,7 @@ public class VotoRepository {
      */
     public void inserir(Voto voto) {
         entityManager.getTransaction().begin();
-        entityManager.persist(voto);
+        entityManager.merge(voto);
         entityManager.getTransaction().commit();
     }
 
@@ -44,5 +44,6 @@ public class VotoRepository {
         );
         return buscarTodosQuery.getResultList();
     }
+
 
 }
